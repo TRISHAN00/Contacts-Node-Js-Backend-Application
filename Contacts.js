@@ -3,7 +3,7 @@ class Contacts {
     this.contacts = [];
   }
 
-  getAllContact(contacts) {
+  getAllContact() {
     return this.contacts;
   }
 
