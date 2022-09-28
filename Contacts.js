@@ -37,3 +37,7 @@ class Contacts {
     return deletedObj;
   }
 }
+
+const contacts = new Contacts();
+
+module.exports = contacts;
