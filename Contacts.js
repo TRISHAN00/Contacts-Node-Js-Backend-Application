@@ -29,4 +29,13 @@ class Contacts {
 
     return this.contacts[index];
   }
+
+  deleteContactById(id) {
+    let index = this.contacts.findIndex((contact) => contact.id === id);
+    let deleteObject = this.contacts[index];
+    this.contacts = this.contacts.filter((contact) => contact.id !== id);
+    return deleteObject;
+  }
 }
+
+module.exports = new Contacts();
