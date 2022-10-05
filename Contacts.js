@@ -17,4 +17,8 @@ class Contacts {
     this.contacts.push(contact);
     return contact;
   }
+
+  updateContactById(id, updatedContact) {
+    const index = this.contacts.findIndex((contact) => contact.id === id);
+  }
 }
