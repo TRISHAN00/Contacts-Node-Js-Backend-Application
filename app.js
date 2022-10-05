@@ -1,9 +1,11 @@
 const express = require("express");
 const morgan = require("morgan");
+const contactRoutes = require("./contactRoutes");
 
 const app = express();
 
 app.use(morgan("dev"));
+app.use("/contacts", contactRoutes);
 
 app.get("/", (req, res) => {
   res.send("This is a Root Route");
