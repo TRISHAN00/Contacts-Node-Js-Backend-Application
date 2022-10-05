@@ -11,4 +11,10 @@ class Contacts {
       contact.id === id;
     });
   }
+
+  createContact(contact) {
+    contact.id = this.contacts.length + 1;
+    this.contacts.push(contact);
+    return contact;
+  }
 }
