@@ -9,7 +9,9 @@ app.use(express.json());
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", {
+    serial: "second",
+  });
 });
 
 const PORT = process.env.PORT || 8080;
