@@ -4,10 +4,12 @@ const app = express();
 
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.join());
+app.use(express.json());
+
+app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  res.send("Working with Template Engine");
+  res.render("index");
 });
 
 const PORT = process.env.PORT || 8080;
