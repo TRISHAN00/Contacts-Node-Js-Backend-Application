@@ -18,11 +18,14 @@
     <% if (post.published) { %>
     <h2><%= post.title %></h2>
     <p><%= post.body %></p>
-
     <% } else { %>
-
     <h3>Post is not yet.</h3>
-
     <% } %>
+
+    <ul>
+      <% for( let p of posts) { %>
+      <li><%= p.title %> By <%= p.author %></li>
+      <% } %>
+    </ul>
   </body>
 </html>

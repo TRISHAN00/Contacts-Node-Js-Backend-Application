@@ -12,10 +12,17 @@ app.get("/", (req, res) => {
   let post = {
     title: "Post Title",
     body: "Post Body",
-    published: true,
+    published: false,
   };
 
-  res.render("index", { serial: "second", post });
+  let posts = [
+    { title: "Top 10 News", author: "Trishan" },
+    { title: "Top 5 News", author: "Jho" },
+    { title: "Top 7 News", author: "Liza" },
+    { title: "Top 1 News", author: "Rishan" },
+  ];
+
+  res.render("index", { serial: "second", post, posts });
 });
 
 const PORT = process.env.PORT || 8080;
