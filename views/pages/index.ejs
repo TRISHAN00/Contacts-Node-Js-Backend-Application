@@ -7,13 +7,8 @@
     <title>EJS Template Engine</title>
   </head>
   <body>
-    <nav>
-      <ul>
-        
-        <li><a href="/about">About</a></li>
-        <li><a href="/help">Help</a></li>
-      </ul>
-    </nav>
+    <%- include("../partials/nav.ejs") %>
+
     <h2>This is My <%= serial%> EJS Engine</h2>
     <p>
       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde tempore
