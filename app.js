@@ -15,6 +15,10 @@ app.get("/help", (req, res) => {
   res.render("pages/help");
 });
 
+app.get("/contact", (req, res) => {
+  res.render("pages/contact");
+});
+
 app.get("/", (req, res) => {
   let post = {
     title: "Post Title",
@@ -30,6 +34,11 @@ app.get("/", (req, res) => {
   ];
 
   res.render("pages/index", { serial: "second", post, posts });
+});
+
+app.post("/", (req, res) => {
+  console.log(req.body);
+  res.send("This is home page");
 });
 
 const PORT = process.env.PORT || 8080;

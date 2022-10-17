@@ -1,33 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EJS Template Engine</title>
-  </head>
-  <body>
-    <%- include("../partials/nav.ejs") %>
+<%- include("../partials/header.ejs") %> <%- include("../partials/nav.ejs") %>
 
-    <h2>This is My <%= serial%> EJS Engine</h2>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde tempore
-      quos fugit illo beatae nulla, repudiandae enim sed sunt consectetur cum
-      fugiat maxime modi ipsam, itaque libero est ipsum blanditiis?
-    </p>
-    <h1>Current Date <%= new Date().toString() %></h1>
+<h2>This is My <%= serial%> EJS Engine</h2>
+<p>
+  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde tempore quos
+  fugit illo beatae nulla, repudiandae enim sed sunt consectetur cum fugiat
+  maxime modi ipsam, itaque libero est ipsum blanditiis?
+</p>
+<h1>Current Date <%= new Date().toString() %></h1>
 
-    <% if (post.published) { %>
-    <h2><%= post.title %></h2>
-    <p><%= post.body %></p>
-    <% } else { %>
-    <h3>Post is not yet.</h3>
-    <% } %>
+<% if (post.published) { %>
+<h2><%= post.title %></h2>
+<p><%= post.body %></p>
+<% } else { %>
+<h3>Post is not yet.</h3>
+<% } %>
 
-    <ul>
-      <% for( let p of posts) { %>
-      <li><%= p.title %> By <%= p.author %></li>
-      <% } %>
-    </ul>
-  </body>
-</html>
+<ul>
+  <% for( let p of posts) { %>
+  <li><%= p.title %> By <%= p.author %></li>
+  <% } %>
+</ul>
+<%- include("../partials/footer.ejs") %>
