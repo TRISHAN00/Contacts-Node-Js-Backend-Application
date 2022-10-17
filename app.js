@@ -5,7 +5,7 @@ app.set("view engine", "ejs");
 
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.raw());
 
 app.get("/about", (req, res) => {
   res.render("pages/about");
@@ -37,7 +37,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  console.log(req.body);
+  console.log(req.body.toString());
   res.send("This is home page");
 });
 
