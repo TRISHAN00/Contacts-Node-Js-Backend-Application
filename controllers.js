@@ -44,3 +44,32 @@ exports.getSingleContact = (req, res) => {
       });
     });
 };
+
+exports.updateContact = (req, res) => {
+  let { name, email, phone } = req.body;
+  console.log(name, email, phone);
+
+  let { id } = req.params;
+  console.log(id);
+
+  Contact.findOneAndUpdate(
+    { _id: id },
+    {
+      $set: {
+        name: name,
+        email: email,
+        phone: phone,
+      },
+    },
+    { new: true }
+  )
+    .then((contact) => {
+      res.json(contact);
+    })
+    .catch((e) => {
+      console.log(e);
+      res.json({
+        message: "Error!!",
+      });
+    });
+};
