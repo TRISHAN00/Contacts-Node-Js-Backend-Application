@@ -19,5 +19,16 @@ exports.createContact = (req, res) => {
 };
 
 exports.getAllContacts = (req, res) => {
-    
-}
+  Contact.find()
+    .then((contact) => {
+      res.json(contact);
+    })
+    .catch((e) => {
+      console.log(e);
+      res.json({
+        message: "Error!!",
+      });
+    });
+};
+
+exports.getSingleContact = (req, res) => {};
