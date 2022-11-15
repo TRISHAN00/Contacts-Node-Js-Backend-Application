@@ -31,4 +31,16 @@ exports.getAllContacts = (req, res) => {
     });
 };
 
-exports.getSingleContact = (req, res) => {};
+exports.getSingleContact = (req, res) => {
+  let { id } = req.params;
+  Contact.findById(id)
+    .then((contact) => {
+      res.json(contact);
+    })
+    .catch((e) => {
+      console.log(e);
+      res.json({
+        message: "Error!!",
+      });
+    });
+};

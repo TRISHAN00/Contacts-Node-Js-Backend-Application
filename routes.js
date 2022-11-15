@@ -1,4 +1,8 @@
-const { createContact, getAllContacts } = require("./controllers");
+const {
+  createContact,
+  getAllContacts,
+  getSingleContact,
+} = require("./controllers");
 
 const router = require("express").Router();
 
