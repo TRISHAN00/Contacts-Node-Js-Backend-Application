@@ -1,35 +1,50 @@
 const express = require("express");
-const morgan = require("morgan");
+const app = express("express");
 const mongoose = require("mongoose");
-let Schema = mongoose.Schema;
-const userSchema = new Schema({
-  name: String,
-  email: String,
-});
-const User = mongoose.model("User", userSchema);
-mongoose
-  .connect("mongodb://127.0.0.1:27017/users")
-  .then(() => {
-    console.log("Database connected");
-    app.get("/", (req, res) => {
-      let user = new User({
-        name: "Trisha",
-        email: "trishandsaha43@gmail.com",
-      });
-      user.save().then((u) => {
-        res.json(u);
-      });
-    });
-  })
-  .catch((e) => console.log(e));
-
-const app = express();
+const morgan = require("morgan");
 
 app.use(morgan("dev"));
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`server is listening on port ${PORT}`);
+// Schema declaratin
+let Schema = mongoose.Schema;
+let contactSchema = new Schema({
+  name: String,
+  email: String,
+  phone: Number,
 });
+let Contact = mongoose.model("Contact", contactSchema);
+
+app.post("/", (req, res) => {
+  const { name, email, phone } = req.body;
+  const contact = new Contact({
+    name: name,
+    email: email,
+    phone: phone,
+  });
+  contact
+    .save()
+    .then((c) => {
+      console.log(c);
+      res.json({
+        message: "Success",
+      });
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+});
+
+// database and server connection
+const PORT = process.env.PORT || 8080;
+mongoose
+  .connect(`mongodb://127.0.0.1:27017/contacts`)
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`server start on port ${PORT}`);
+    });
+  })
+  .catch((e) => {
+    console.log(e);
+  });
