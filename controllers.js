@@ -20,8 +20,8 @@ exports.createContact = (req, res) => {
 
 exports.getAllContacts = (req, res) => {
   Contact.find()
-    .then((contact) => {
-      res.json(contact);
+    .then((contacts) => {
+      res.render("index", { contacts });
     })
     .catch((e) => {
       console.log(e);
