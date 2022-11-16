@@ -1,8 +1,23 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const morgan = require("morgan");
+const router = require("./routes/contactRoutes");
 
 const app = express("");
+
+app.use([
+  morgan("dev"),
+  express.urlencoded({ extended: true }),
+  express.json(),
+]);
+
+app.use("/contacts", router);
+
+app.get("/", (_req, res) => {
+  res.json({
+    message: "Root Route",
+  });
+});
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
@@ -10,7 +25,7 @@ app.listen(PORT, () => {
 });
 
 mongoose
-  .connect(`mongodb://127.0.0.1:27017/test`)
+  .connect(`mongodb://127.0.0.1:27017/contacts`)
   .then(() => {
     console.log(`Database is connected`);
   })
