@@ -36,6 +36,20 @@ exports.getAllContacts = (_req, res) => {
     });
 };
 
+exports.getSingleContact = (req, res) => {
+  let { id } = req.params;
+  Contact.findById(id)
+    .then((contact) => {
+      res.json(contact);
+    })
+    .catch((e) => {
+      console.log(r);
+      res.json({
+        message: "Error occurred!",
+      });
+    });
+};
+
 exports.updateContact = (req, res) => {
   let { name, email, phone } = req.body;
   let { id } = req.params;
@@ -50,4 +64,9 @@ exports.updateContact = (req, res) => {
         message: "Error occurred!",
       });
     });
+};
+
+exports.deleteContact = (req, res) => {
+  const { id } = req.params;
+  Contact.findOneAndDelete(id);
 };
