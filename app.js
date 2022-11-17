@@ -5,6 +5,8 @@ const router = require("./routes/contactRoutes");
 
 const app = express("");
 
+app.set("view engine", "ejs");
+
 app.use([
   morgan("dev"),
   express.urlencoded({ extended: true }),

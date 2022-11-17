@@ -26,7 +26,8 @@ exports.createContact = (req, res) => {
 exports.getAllContacts = (_req, res) => {
   Contact.find()
     .then((contacts) => {
-      res.json(contacts);
+      console.log(contacts);
+      res.render("index", { contacts });
     })
     .catch((e) => {
       console.log(r);
