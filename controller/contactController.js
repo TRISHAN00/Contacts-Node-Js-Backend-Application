@@ -4,6 +4,25 @@ exports.createContact = (req, res) => {
   let { name, email, phone } = req.body;
   console.log(req.body);
 
+  let error = {};
+
+  if (!name) {
+    error.name = "Please put a valid name";
+  }
+
+  if (!email) {
+    error.email = "Please put a valid email";
+  }
+
+  if (!phone) {
+    error.phone = "Please put a valid phone number";
+  }
+
+  let isError = Object.keys(error).length > 0;
+
+  console.log(error, isError);
+  return;
+
   let contact = new Contact({
     name,
     email,
@@ -16,7 +35,7 @@ exports.createContact = (req, res) => {
       res.json(contact);
     })
     .catch((e) => {
-      console.log(r);
+      console.log(e);
       res.json({
         message: "Error occurred!",
       });
