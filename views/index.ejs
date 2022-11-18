@@ -30,6 +30,7 @@
             action="/contacts"
             method="POST"
             class="form-inline align-items-center justify-content-center"
+            id="my-form"
           >
             <div class="form-group mr-2">
               <div class="single-input">
@@ -68,7 +69,9 @@
                 <div class="invalid-feedback"><%= error.phone %></div>
               </div>
             </div>
-
+            <div class="form-group mr-3">
+              <input type="hidden" name="id" />
+            </div>
             <input class="btn btn-success" type="submit" value="Submit" />
           </form>
         </div>
@@ -100,7 +103,15 @@
                   <td><%= contact.phone %></td>
 
                   <td>
-                    <button class="btn btn-primary">Edit</button>
+                    <button
+                      class="btn btn-primary edit-btn"
+                      data-name="<%= contact.name %> "
+                      data-email="<%= contact.email %> "
+                      data-phone="<%= contact.phone %> "
+                      data-id="<%= contact._id%> "
+                    >
+                      Edit
+                    </button>
                     <a
                       class="btn btn-danger"
                       href="/contacts/delete/<%= contact._id %> "
@@ -133,5 +144,21 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script>
+      window.onload = function () {
+        let editBtn = document.getElementsByClassName("edit-btn");
+        [...editBtn].forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            let { name, email, phone, id } = e.target.dataset;
+            let form = document.getElementById("my-form");
+            form[0].value = name;
+            form[1].value = email;
+            form[2].value = phone;
+            form[3].value = id;
+            form[4].value = "Update";
+          });
+        });
+      };
+    </script>
   </body>
 </html>
