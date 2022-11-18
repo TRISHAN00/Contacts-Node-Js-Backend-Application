@@ -1,27 +1,51 @@
 const Contact = require("../model/Contact");
 
+exports.getAllContacts = (_req, res) => {
+  Contact.find()
+    .then((contacts) => {
+      res.render("index", { contacts, error: {} });
+    })
+    .catch((e) => {
+      console.log(e);
+      res.json({
+        message: "Error occurred!",
+      });
+    });
+};
+
 exports.createContact = (req, res) => {
-  let { name, email, phone } = req.body;
   console.log(req.body);
+  let { name, email, phone } = req.body;
 
   let error = {};
 
   if (!name) {
-    error.name = "Please put a valid name";
+    error.name = "Please input a name";
   }
 
   if (!email) {
-    error.email = "Please put a valid email";
+    error.email = "Please input a email";
   }
 
   if (!phone) {
-    error.phone = "Please put a valid phone number";
+    error.phone = "Please input a phone number";
   }
 
   let isError = Object.keys(error).length > 0;
 
+  if (isError) {
+    Contact.find()
+      .then((contacts) => {
+        return res.render("index", { contacts, error });
+      })
+      .catch((e) => {
+        return res.json({
+          message: "Error occurred!",
+        });
+      });
+  }
+
   console.log(error, isError);
-  return;
 
   let contact = new Contact({
     name,
@@ -32,25 +56,13 @@ exports.createContact = (req, res) => {
   contact
     .save()
     .then((contact) => {
-      res.json(contact);
+      Contact.find().then((contacts) => {
+        return res.render("index", { contacts, error: {} });
+      });
     })
     .catch((e) => {
       console.log(e);
-      res.json({
-        message: "Error occurred!",
-      });
-    });
-};
-
-exports.getAllContacts = (_req, res) => {
-  Contact.find()
-    .then((contacts) => {
-      console.log(contacts);
-      res.render("index", { contacts });
-    })
-    .catch((e) => {
-      console.log(r);
-      res.json({
+      return res.json({
         message: "Error occurred!",
       });
     });
@@ -87,6 +99,17 @@ exports.updateContact = (req, res) => {
 };
 
 exports.deleteContact = (req, res) => {
-  const { id } = req.params;
-  Contact.findOneAndDelete(id);
+  let { id } = req.params;
+  Contact.findOneAndDelete({ _id: id }).then(() => {
+    Contact.find()
+      .then((contacts) => {
+        res.render("index", { contacts, error: {} });
+      })
+      .catch((e) => {
+        console.log(e);
+        return res.json({
+          message: "Error occurred!",
+        });
+      });
+  });
 };

@@ -21,15 +21,14 @@ app.get("/", (_req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server will listen on port ${PORT}`);
-});
-
 mongoose
   .connect(`mongodb://127.0.0.1:27017/contacts`)
   .then(() => {
     console.log(`Database is connected`);
+    const PORT = process.env.PORT || 8080;
+    app.listen(PORT, () => {
+      console.log(`Server will listen on port ${PORT}`);
+    });
   })
   .catch((e) => {
     console.log(e);
